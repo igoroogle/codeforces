@@ -1,0 +1,48 @@
+program ZAD_C;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+const
+   dl = 10000000;
+var
+   a:array [1..5010] of integer;
+   b:array [0..dl] of boolean;
+   i,j,t,p,n,k,x,r,min,q:integer;
+begin
+   for i:=1 to dl do b[i]:=false;
+   b[0]:=true;
+   read(n,k);
+   for i:=1 to n do
+      begin
+         read(a[i]);
+         b[a[i]]:=true;
+      end;
+   read(q);
+   for p:=1 to q do
+      begin
+         read(x);
+         min:=-1;
+         for i:=1 to n do
+            for j:=1 to k do
+               begin
+                  r:=x-a[i]*j;
+                  if (r=0) and ((j<min) or (min=-1)) then
+                     begin
+                        min:=j;
+                        continue;
+                     end;
+                  if (r<=0) then continue;
+                  for t:=1 to k-j do
+                     if (min=-1) or (t+j<min) then
+                        begin
+                           if (r mod t = 0) and (r div t <=dl)
+                           and (b[r div t]) then min:=j+t;
+                        end;
+               end;
+         writeln(min);
+      end;
+   readln;
+   readln;
+end.

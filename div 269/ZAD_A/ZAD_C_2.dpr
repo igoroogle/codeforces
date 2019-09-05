@@ -1,0 +1,17 @@
+program ZAD_C_2;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+var
+   klizma,i:integer;
+   n:int64;
+begin
+   readln(n);
+   klizma:=0;
+   for i:=1 to 1010000 do
+      if ((n+i) mod 3 = 0) and (((n+i) div 3) >= trunc((1.0 * (1+i) * i) / 2)) then inc(klizma);
+   writeln(klizma);//I love asya
+   readln;
+end.

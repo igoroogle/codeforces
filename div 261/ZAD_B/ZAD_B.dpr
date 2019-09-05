@@ -1,0 +1,36 @@
+program ZAD_B;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+var
+   n,i:integer;
+   max,min,kolmax,kolmin,x:int64;
+begin
+   readln(n);
+   max:=-maxint;
+   min:=maxint;
+   kolmin:=0;
+   kolmax:=0;
+   for i:=1 to n do
+      begin
+         read(x);
+         if (x=max) then inc(kolmax);
+         if (x=min) then inc(kolmin);
+         if (x>max) then
+            begin
+               max:=x;
+               kolmax:=1;
+            end;
+         if (x<min) then
+            begin
+               min:=x;
+               kolmin:=1;
+            end;
+      end;
+   readln;
+   if (max<>min) then writeln(abs(max-min),' ',kolmax*kolmin)
+   else writeln(abs(max-min),' ',trunc((1+kolmax-1)/2*(kolmax-1)));
+   readln;
+end.

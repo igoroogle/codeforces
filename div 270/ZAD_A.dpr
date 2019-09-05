@@ -1,0 +1,43 @@
+program ZAD_A;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+
+var
+   a:array [1..1000000] of boolean;
+   i,j,n:integer;
+begin
+   for i:=1 to 1000000 do a[i]:=true;
+   i:=4;
+   while i<=1000000 do
+      begin
+         a[i]:=false;
+         inc(i,2);
+      end;
+   i:=3;
+   while i<=1000000 do
+      begin
+         if (a[i]) then
+            begin
+               j:=i+i;
+               while j<=1000000 do
+                  begin
+                     a[j]:=false;
+                     j:=j+i;
+                  end;
+            end;
+         inc(i,2);
+      end;
+   readln(n);
+   i:=1;
+   j:=n-1;
+   while (a[i]) or (a[j]) do
+      begin
+         inc(i);
+         dec(j);
+      end;
+   writeln(i,' ',j);
+   readln;
+end.

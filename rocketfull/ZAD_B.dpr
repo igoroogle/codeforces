@@ -1,0 +1,43 @@
+program ZAD_B;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+
+var
+   n,i,j,p,min,dd,x,ss,m:integer;
+   a:array [1..50] of integer;
+begin
+   read(n,m);
+   ss:=0;
+   for i:=1 to n do a[i]:=i;
+   while true do
+      begin
+         p:=n-1;
+         while (p>0) and (a[p+1]<a[p]) do dec(p);
+         inc(ss);
+         if (ss=m) then break;
+         if (p=0)  then break;
+         min:=p+1;
+         for i:=p+2 to n do
+            if (a[i]>a[p]) and (a[i]<a[min]) then min:=i;
+         dd:=a[min];
+         a[min]:=a[p];
+         a[p]:=dd;
+         for i:=p+2 to n do
+            begin
+               j:=i-1;
+               x:=a[i];
+               while (j>p) and (a[j]>x) do
+                  begin
+                     a[j+1]:=a[j];
+                     dec(j);
+                  end;
+               a[j+1]:=x;
+            end;
+      end;
+   for i:=1 to n do write(a[i],' ');
+   readln;
+   readln;
+end.

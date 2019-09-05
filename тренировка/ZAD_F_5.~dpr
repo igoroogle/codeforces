@@ -1,0 +1,35 @@
+program ZAD_F_5;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+var
+   a,b,c,i:integer;
+   m,t:extended;
+begin
+   readln(a,b,c);
+   m:=0;
+  if (c>b) then
+     begin
+        t:=(b-a+1);
+        for i:=a to b do m:=(i+i)/t+m;
+     end
+  else if (c<a*2) then
+     begin
+        t:=(b-a+1);
+        for i:=a to b do m:=i/t+m;
+     end
+  else
+     begin
+        t:=(b-a+1)*2;
+        for i:=a to b do
+           begin
+              m:=i/t+m;
+              m:=(i+i)/t+m;
+           end;
+     end;
+   if (m>=c) then writeln('Take another envelope')
+   else writeln('Stay with this envelope');
+   readln;
+end.

@@ -1,0 +1,21 @@
+program zad_A;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils, math;
+var
+  a, b, c, r, s, s1, p, r1 : extended;
+begin
+  readln(a, b, c, r);
+
+  p := (a + b + c)/2;
+  s := sqrt(p * (p - a) * (p - b) * (p - c));
+  r1 := s / p;
+
+  s1 := sqr(r/r1) * s - pi * r * r;
+
+  writeln(s1/s);
+
+  readln(a);
+end.

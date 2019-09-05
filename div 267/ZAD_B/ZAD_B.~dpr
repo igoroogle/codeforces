@@ -1,0 +1,31 @@
+program ZAD_B;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+var
+   k,n,m:integer;
+   a:array [1..1010] of integer;
+   pl,a1,b1,s,s1,i:integer;
+begin
+   readln(n,m,k);
+   for i:=1 to m do read(a[i]);
+   readln(pl);
+   s:=0;
+   for i:=1 to m do
+      begin
+         a1:=a[i];
+         b1:=pl;
+         s1:=0;
+         while (a1>0) and (b1>0) do
+            begin
+               if (a1 mod 2<>b1 mod 2) then inc(s1);
+               a1:=a1 div 2;
+               b1:=b1 div 2;
+            end;
+         if (s1<k) then inc(s);
+      end;
+   writeln(s);
+   readln;
+end.

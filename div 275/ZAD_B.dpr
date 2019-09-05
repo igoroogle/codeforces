@@ -1,0 +1,29 @@
+program ZAD_B;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+
+var
+   cnt1,cnt2,x,y,l,r,m,nok:int64;
+function nod(a,b:int64):int64;
+begin
+   if (b=0) then nod:=a
+   else nod:=nod(b,a mod b);
+end;
+begin
+   readln(cnt1,cnt2,x,y);
+   nok:=trunc(1.0*x*(y div nod(x,y)));
+   writeln(nok);
+   l:=1;
+   r:=1000000000000000005;
+   while l+1<r do
+      begin
+         m:=(r+l) div 2;
+         if (m div x + m div y - m div nok < cnt1+cnt2) then l:=m
+         else r:=m;
+      end;
+   writeln(l);
+   readln;
+end.

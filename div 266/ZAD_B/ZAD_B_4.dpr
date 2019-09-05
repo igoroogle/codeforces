@@ -1,0 +1,87 @@
+program ZAD_B_4;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+const
+   sq = 40000;
+var
+   n,a,b,a1,b1,ax,by,min:int64;
+   i:integer;
+begin
+   readln(n,a,b);
+   a1:=trunc(1.0*(trunc(1.0*6*n)-1)/b)+1;
+   b1:=trunc(1.0*(trunc(1.0*6*n)-1)/a)+1;
+   if (trunc(1.0*a*b)>=trunc(1.0*6*n)) then
+      begin
+         min:=trunc(1.0*a*b);
+         ax:=a;
+         by:=b;
+         writeln(min);
+         writeln(ax,' ',by);
+         readln;
+         halt;
+      end
+   else if (trunc(1.0*a1*b)<trunc(1.0*b1*a)) then
+      begin
+         min:=trunc(1.0*a1*b);
+         ax:=a1;
+         by:=b;
+      end
+   else
+      begin
+         min:=trunc(1.0*a*b1);
+         ax:=a;
+         by:=b1;
+      end;
+   for i:=1 to sq do
+      begin
+         a1:=trunc(1.0*a*i);
+         b1:=b;
+         if (trunc(1.0*a1*b1)>=trunc(1.0*6*n)) then
+            begin
+               if (trunc(1.0*a1*b1)<min) then
+                  begin
+                     min:=trunc(1.0*a1*b1);
+                     ax:=a1;
+                     by:=b1;
+                  end;
+            end
+         else
+            begin
+               b1:=trunc(1.0*(trunc(1.0*6*n)-1)/a1)+1;
+               if (b1>=b) and (trunc(1.0*a1*b1)<min) then
+                  begin
+                     min:=trunc(1.0*a1*b1);
+                     ax:=a1;
+                     by:=b1;
+                  end;
+            end;
+         //k
+         b1:=trunc(1.0*b*i);
+         a1:=a;
+         if (trunc(1.0*a1*b1)>=trunc(1.0*6*n)) then
+            begin
+               if (trunc(1.0*a1*b1)<min) then
+                  begin
+                     min:=trunc(1.0*a1*b1);
+                     ax:=a1;
+                     by:=b1;
+                  end;
+            end
+         else
+            begin
+               a1:=trunc(1.0*(trunc(1.0*6*n)-1)/b1)+1;
+               if (a1>=a) and (a1*b1<min) then
+                  begin
+                     min:=trunc(1.0*a1*b1);
+                     ax:=a1;
+                     by:=b1;
+                  end;
+            end;
+      end;
+   writeln(min);
+   writeln(ax,' ',by);
+   readln;
+end.

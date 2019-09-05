@@ -1,0 +1,13 @@
+program ZAD_F;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+var
+   x,y,a,b,c:extended;
+begin
+   readln(x,y,a,b,c);
+   writeln(abs(a*x+b*y+c)/sqrt(a*a+b*b));
+   readln;
+end.

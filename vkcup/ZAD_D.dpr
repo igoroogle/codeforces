@@ -1,0 +1,69 @@
+program ZAD_D;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils,Math;
+const
+   inf = 7000000000000000000;
+   dl = 4000100;
+var
+   v:array [1..dl] of int64;
+   n,k,i,kol:integer;
+   s,m,f:int64;
+procedure swap (var a,b:int64);
+var
+   c:int64;
+begin
+   c:=a;
+   a:=b;
+   b:=c;
+end;
+procedure push (x:integer);
+var
+   i:integer;
+begin
+   i:=x;
+   while (i>1) and (v[i div 2] > v[i]) do
+      begin
+         swap(v[i],v[i div 2]);
+         i:=i div 2;
+      end;
+end;
+function pop ():int64;
+var
+   i,k:integer;
+begin
+   pop:=v[1];
+   i:=1;
+   while (v[i]<>inf) do
+      begin
+         if (v[i+i+1]<v[i+i]) then k:=i+i+1
+         else k:=i+i;
+         v[i]:=v[k];
+         i:=k;
+      end;
+end;
+begin
+   for i:=1 to dl do v[i]:=inf;
+   read(n,k);
+   kol:=0;
+   for i:=1 to k do
+      begin
+         inc(kol);
+         v[kol]:=0;
+         push(kol);
+      end;
+   for i:=1 to n do
+      begin
+         read(s,m);
+         f:=pop();
+         f:=max(f,s)+m;
+         inc(kol);
+         v[kol]:=f;
+         push(kol);
+         writeln(f);
+      end;
+   readln;
+   readln;
+end.

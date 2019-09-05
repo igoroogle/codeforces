@@ -1,0 +1,21 @@
+program ZAD_A;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+var
+   x1,y1,x2,y2,len:integer;
+begin
+readln(x1, y1, x2, y2);
+  if(x1 <> x2) and (y1 = y2) then begin
+    len := abs(x1 - x2);
+    writeln(x1, ' ', y1 + len, ' ', x2, ' ', y2 + len);
+  end else if (x1 = x2) and (y1 <> y2) then begin
+    len := abs(y1 - y2);
+    writeln(x1 + len, ' ', y1, ' ', x2 + len, ' ', y2);
+  end else if(abs(x1 - x2) = abs(y1 - y2)) then begin
+    writeln(x1, ' ', y2, ' ', x2, ' ', y1);
+  end else
+    writeln(-1);
+end;

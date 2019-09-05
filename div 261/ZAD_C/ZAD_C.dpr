@@ -1,0 +1,44 @@
+program ZAD_C;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+var
+   a:array [1..1010,1..1010] of integer;
+   i,j,n,d:integer;
+   k,p:int64;
+begin
+   readln(n,k,d);
+   i:=0;
+   p:=1;
+   while (n>p) and (i<d) do
+      begin
+         inc(i);
+         p:=p*k;
+      end;
+   if (n>p) then
+      begin
+         writeln(-1);
+         readln;
+         halt;
+      end;
+   for i:=1 to d do a[i,1]:=1;
+   for j:=2 to n do
+      begin
+         i:=d;
+         while (i>=1) and (a[i,j-1]=k) do
+            begin
+               a[i,j]:=1;
+               dec(i);
+            end;
+         if (i>0) then a[i,j]:=a[i,j-1]+1;
+         for i:=i-1 downto 1 do a[i,j]:=a[i,j-1];
+      end;
+   for i:=1 to d do
+      begin
+         for j:=1 to n-1 do write(a[i,j],' ');
+         writeln(a[i,n]);
+      end;
+   readln;
+end.

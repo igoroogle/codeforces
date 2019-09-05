@@ -1,0 +1,26 @@
+program ZAD_A;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+var
+   s,s1:string;
+   i,j:integer;
+begin
+   readln(s);
+   for i:=1 to length(s) do
+      for j:=i to length(s) do
+          begin
+             s1:=s;
+             delete(s1,i,j-i+1);
+             if (s1 = 'CODEFORCES') then
+                begin
+                   writeln('YES');
+                   readln;
+                   halt;
+                end;
+          end;
+   writeln('NO');
+   readln;
+end.

@@ -1,0 +1,157 @@
+program ZAD_I_6;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+var
+   less,more:array [0..9,0..9] of boolean;
+   use,nul:array [0..9] of boolean;
+   a:array [1..11] of string;
+   c,d:array [0..11] of integer;
+   i,j,p,n,kol,dd:integer;
+   f,pr:boolean;
+begin
+   reset(input,'tiv.in');
+   assign(output,'tiv.out');
+   for i:=0 to 9 do
+      begin
+         use[i]:=true;
+         nul[i]:=true;
+      end;
+   for i:=0 to 9 do
+      for j:=0 to 9 do
+         begin
+            less[i,j]:=false;
+            more[i,j]:=false;
+         end;
+   readln(n);
+   for i:=1 to n do
+      begin
+         readln(a[i]);
+         p:=0;
+         if (length(a[i])>1) then nul[ord(a[i][p])-97]:=false;
+         for j:=1 to i-1 do
+            if (length(a[i])=length(a[j])) then
+               begin
+                  for p:=1 to length(a[i]) do
+                     if (a[i][p]<>a[j][p]) then
+                        begin
+                           less[ord(a[i][p])-97,ord(a[j][p])-97]:=true;
+                           more[ord(a[j][p])-97,ord(a[i][p])-97]:=true;
+                           break;
+                        end;
+               end;
+      end;
+   {for i:=0 to 9 do
+      for j:=0 to 9 do writeln(i,' ',j,' ',less[i,j]);
+   writeln('--------');
+   for i:=0 to 9 do
+      for j:=0 to 9 do writeln(i,' ',j,' ',more[i,j]);
+   readln;
+   halt;}
+   for i:=2 to n do
+      if (length(a[i-1])>length(a[i])) or (a[i]=a[i-1]) then
+         begin
+            writeln('No');
+            readln;
+            halt;
+         end;
+   for i:=0 to 9 do
+      for j:=0 to 9 do
+         if (less[i,j]) and (more[i,j]) then
+            begin
+               writeln('No');
+               readln;
+               halt;
+            end;
+   p:=0;
+   pr:=true;
+   for i:=0 to 9 do
+      if (nul[i]) then
+         begin
+            f:=true;
+            for j:=0 to 9 do
+               if (less[i,j]) then f:=false;
+            if (f) then
+               begin
+                  c[0]:=i;
+                  use[i]:=false;
+                  pr:=false;
+                  break;
+               end;
+         end;
+   if (pr) then
+            begin
+               writeln('No');
+               readln;
+               halt;
+            end;
+   for kol:=1 to 9 do
+      begin
+         for i:=0 to 9 do
+            if  (use[i]) then
+               begin
+                  f:=true;
+                  p:=i;
+                  while (f) do
+                     begin
+                        f:=false;
+                        for j:=0 to 9 do
+                           if (less[p,j]) and (use[j]) then
+                              begin
+                                 p:=j;
+                                 f:=true;
+                                 break;
+                              end;
+                     end;
+                  break;
+               end;
+         c[kol]:=p;
+         use[p]:=false;
+      end;
+   for i:=0 to 9 do d[c[i]]:=i;
+   //for i:=1 to 10 do d[i]:=c[i];
+   for i:=1 to n do
+      if (length(a[i])>1) and (ord(a[i][1])-97=d[0]) then
+         begin
+            writeln('No');
+            readln;
+            halt;
+         end;
+   {i:=1;
+   while i<=n do
+      begin
+         pr:=false;
+         if (length(a[i])>1) and (ord(a[i][1])-97=d[0]) then
+            begin
+               for j:=1 to 9 do
+                  if (not (more[d[0],d[j]])) then
+                     begin
+                        f:=true;
+                        for p:=1 to j-1 do
+                           if (more[d[j],d[p]]) then f:=false;
+                        for p:=j+1 to 9 do
+                           if (more[d[j],d[p]]) then f:=false;
+                        if (f) then
+                           begin
+                              dd:=d[0];
+                              d[0]:=d[j];
+                              d[j]:=dd;
+                              i:=1;
+                              pr:=true;
+                              break;
+                           end;
+                     end;
+               if (pr) then continue;
+               writeln('No');
+               readln;
+               halt;
+            end;
+         inc(i);
+      end;}
+   writeln('Yes');
+   for i:=0 to 8 do write(d[i],' ');
+   writeln(d[9]);
+   readln;
+end.

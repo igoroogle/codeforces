@@ -1,0 +1,96 @@
+program dota_2;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+var
+   pw,num:array [0..20] of integer;
+   st:array [0..20] of char;
+   a:array [0..100] of integer;
+   d:array [0..1048576] of integer;
+   b:array [0..1048576] of boolean;
+   n,m,i:integer;
+procedure quicksort (f,l:integer);
+var
+   i,j,x,dd:integer;
+begin
+   i:=f;
+   j:=l;
+   randomize;
+   x:=a[random(l-f+1)+f];
+   repeat
+      while (a[i]>x) do inc(i);
+      while (a[j]<x) do dec(j);
+      if (i<=j) then
+         begin
+            dd:=a[i];
+            a[i]:=a[j];
+            a[j]:=dd;
+            inc(i);
+            dec(j);
+         end;
+   until i>j;
+   if (i<l) then quicksort(i,l);
+   if (f<j) then quicksort(f,j);
+end;
+function rec(pl,bt:integer):integer;
+var
+   i,j,max,pr:integer;
+begin
+   if (pl=21) or (bt=0) then
+      begin
+         rec:=0;
+         exit;
+      end;
+   if (b[bt]) then
+      begin
+         rec:=d[bt];
+         exit;
+      end;
+   i:=bt;
+   j:=0;
+   if (num[pl]=1) then max:=-maxint
+   else max:=maxint;
+   while i>0 do
+      begin
+         if (odd(i)) then
+            begin
+               if (st[pl]='p') then
+                  begin
+                     if (num[pl]=1) then max:=rec(pl+1,bt-pw[j])+a[j]
+                     else max:=rec(pl+1,bt-pw[j])-a[j];
+                     break;
+                  end
+               else
+                  begin
+                      pr:=rec(pl+1,bt-pw[j]);
+                      if (num[pl]=1) and (pr>max) then max:=pr
+                      else if (num[pl]=2) and (pr<max) then max:=pr
+                  end;
+            end;
+         inc(j);
+         i:=i div 2;
+      end;
+   b[bt]:=true;
+   d[bt]:=max;
+   rec:=max;
+end;
+begin
+   readln(n);
+   for i:=0 to n-1 do read(a[i]);
+   quicksort(0,n-1);
+   readln(m);
+   pw[0]:=1;
+   for i:=1 to m do  pw[i]:=pw[i-1]*2;
+  for i:=0 to pw[m]-1 do b[i]:=false;
+  b[0]:=true;
+  d[0]:=0;
+   for i:=0 to m-1 do
+      begin
+         read(st[i]);
+         readln(num[i]);
+      end;
+   writeln(rec(0,pw[m]-1));
+   readln;
+end.

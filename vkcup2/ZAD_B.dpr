@@ -1,0 +1,57 @@
+program ZAD_B;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+var
+   head,list,next,a:array [1..400010] of integer;
+   sum:array [1..200010] of int64;
+   kol,i,g,x,n:integer;
+   mx:int64;
+procedure push(x,y:integer);
+begin
+   inc(kol);
+   list[kol]:=y;
+   next[kol]:=head[x];
+   head[x]:=kol;
+end;
+procedure dfs(k:integer);
+var
+   i,kl,mn:integer;
+   sm:int64;
+begin
+   i:=head[k];
+   kl:=0;
+   mn:=maxint;
+   sm:=0;
+   while (i<>-1) do
+      begin
+         dfs(list[i]);
+         sm:=sm+sum[list[i]];
+         if (sum[list[i]]<mn) then mn:=sum[list[i]];
+         i:=next[i];
+         inc(kl);
+      end;
+  if (odd(kl)) then sm:=sm-mn;
+  sum[k]:=sm+a[k];
+end;
+begin
+   for i:=1 to 400010 do head[i]:=-1;
+   kol:=0;
+   read(n);
+   g:=1;
+   for i:=1 to n do
+      begin
+         read(x,a[i]);
+         if (x=-1) then g:=i
+         else push(x,i);
+      end;
+   dfs(g);
+   mx:=0;
+   for i:=1 to n do
+      if (sum[i]>mx) then mx:=sum[i];
+   writeln(mx);
+   readln;
+   readln;
+end.
