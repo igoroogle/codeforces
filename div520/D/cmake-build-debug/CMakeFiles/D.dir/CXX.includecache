@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/Igor/Documents/codeforces/div520/D/main.cpp
+iostream
+-
+iostream
+-
+iostream
+-
+iostream
+-
+iomanip
+-
+vector
+-
+utility
+-
+cmath
+-
+

@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/Igor/Documents/codeforces/ed33/3/main.cpp
+algorithm
+-
+algorithm
+-
+iostream
+-
+cmath
+-
+cstdio
+-
+ctime
+-
+cctype
+-
+cstdlib
+-
+vector
+-
+map
+-
+set
+-
+

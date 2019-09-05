@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/Igor/Documents/codeforces/div463/3/main.cpp
+algorithm
+-
+map
+-
+cmath
+-
+iostream
+-
+vector
+-
+string
+-
+
