@@ -34,5 +34,20 @@ typedef pair<int, int> pii;
 
 int main() {
     ios_base::sync_with_stdio(0);
+    string s;
+    cin >> s;
+    int n = s.length();
 
+    for (int i = 1; i < n; ++i) {
+        if (s[i] == '1') {
+            ++n;
+            break;
+        }
+    }
+    --n;
+
+    if (n > 0 ) {
+        n = (n - 1) / 2 + 1;
+    }
+    cout << n  << '\n';
 }

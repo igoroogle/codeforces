@@ -34,5 +34,8 @@ typedef pair<int, int> pii;
 
 int main() {
     ios_base::sync_with_stdio(0);
-
+    ll n, l, r;
+    cin >> n >> l >> r;
+    cout << (ll(1) << l) - ll(1) + n - l << ' ';
+    cout << (ll(1) << r) - ll(1) + (n - r) * (ll(1) << (r - 1)) << '\n';
 }
