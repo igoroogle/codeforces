@@ -25,6 +25,7 @@
 #define mp make_pair
 #define pb push_back
 #define em emplace_back
+#define sqr(x) (x) * (x)
 #define sqr(x) ((x) * (x))
 #define all(a) (a).begin(), (a).end()
 #define forn(i, n) for (int i = 0; i < int(n); ++i)
@@ -43,5 +44,5 @@ const ld PI = 3.141592653589793116;
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-    
+
 }
